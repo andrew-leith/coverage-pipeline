@@ -50,17 +50,4 @@ colnames(nucleotide.data) <- c("Comparison", "p-value", "Adjusted p-value", "Dif
 
 write.table(nucleotide.data, "nucleotide_coverage_table.txt", sep = "\t", quote = F, row.names = F)
 
-\documentclass{article}
-
-\begin{document}
-
-Hello R world. This is my first LaTeX document.
-
-<<echo = TRUE, message = FALSE>>=
-
-x <- rnorm(1000)
-plot(x)
-
-@
-
-\end{document}
+rmarkdown::render("correlation.Rmd")

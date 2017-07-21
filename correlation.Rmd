@@ -1,0 +1,18 @@
+---
+title: "correlation"
+output: pdf_document
+---
+
+
+```{r, echo = F}
+print(nucleotide.data)
+```
+
+Density plot showing distribution:
+
+```{r, echo = F}
+plot(density(t.table$reads))
+lines(density(c.table$reads), col = "red")
+lines(density(g.table$reads), col = "blue")
+lines(density(a.table$reads), col = "green")
+```
