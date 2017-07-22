@@ -5,10 +5,7 @@ reference.file <- as.character(args[2])
 
 library(Biostrings)
 
-#reference.genome <- readDNAStringSet("hiv_reference.fasta")
 reference.genome <- readDNAStringSet(reference.file)
-
-#full.result <- read.table("output_new.txt")
 full.result <- read.table(data.file)
 
 
@@ -26,10 +23,9 @@ t.table <- subset(coverage.table, coverage.table$base == "T")
 c.table <- subset(coverage.table, coverage.table$base == "C")
 g.table <- subset(coverage.table, coverage.table$base == "G")
 a.table <- subset(coverage.table, coverage.table$base == "A")
-plot(density(t.table$reads))
-lines(density(c.table$reads), col = "red")
-lines(density(g.table$reads), col = "blue")
-lines(density(a.table$reads), col = "green")
+
+all.measurements <- c(density(t.table$reads)$y, density(c.table$reads)$y, density(g.table$reads)$y, density(a.table$reads)$y)
+# Ensure that the plot will include the entire curves without clipping any of them
 
 options(warn=-1)
 tc.test <- ks.test(t.table$reads, c.table$reads)
@@ -47,7 +43,5 @@ comparison.vector <- c("T v. C", "T v. G", "T v. A", "G v. C", "G v. A", "C v. A
 
 nucleotide.data <- data.frame(comparison.vector, test.vector, corrected.test.vector, significant.vector)
 colnames(nucleotide.data) <- c("Comparison", "p-value", "Adjusted p-value", "Difference in coverage")
-
-write.table(nucleotide.data, "nucleotide_coverage_table.txt", sep = "\t", quote = F, row.names = F)
 
 rmarkdown::render("correlation.Rmd")

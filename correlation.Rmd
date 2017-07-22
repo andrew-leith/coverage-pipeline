@@ -11,7 +11,7 @@ print(nucleotide.data)
 Density plot showing distribution:
 
 ```{r, echo = F}
-plot(density(t.table$reads))
+plot(density(t.table$reads), ylim = c(0, max(all.measurements)))
 lines(density(c.table$reads), col = "red")
 lines(density(g.table$reads), col = "blue")
 lines(density(a.table$reads), col = "green")
