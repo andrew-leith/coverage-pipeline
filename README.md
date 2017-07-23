@@ -1,6 +1,6 @@
 # Coverage Pipeline
 
-How to run the software
+A description of the available arguments and an example of how to run the software.
 
 ## Arguments
 
