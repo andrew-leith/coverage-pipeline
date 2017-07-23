@@ -10,9 +10,9 @@ Furthermore, two R packages are required to run the software.  One is the 'rmark
 
 Other dependencies can be efficiently installed through the Conda package manager.
 
-conda install bwa
-conda install samtools
-conda install bedtools
-conda install pandoc
+	conda install bwa
+	conda install samtools
+	conda install bedtools
+	conda install pandoc
 
 Any other method of installation is fine as long as the resulting binaries are added to the user's PATH.  BWA, Samtools, and Bedtools are used for processing the sequence files, while pandoc is used to compile the pdf upon completion of the analysis.
