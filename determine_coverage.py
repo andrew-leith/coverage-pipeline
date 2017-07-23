@@ -9,8 +9,7 @@ parser.add_argument('-x', '--reference-genome', type=str, required = True)
 parser.add_argument('-q', '--quality-threshold', type=int, default = 0)
 parser.add_argument('-i', '--index', default=False, action='store_true')
 parser.add_argument('-t', '--aligner-threads', type=str, default = "1")
-#parser.add_argument('-c', '--check-quality', action='store_true', help="run FastQC on samples?")
-
+parser.add_argument('-d', '--delete-alignment', default=False, action='store_true')
 
 results = parser.parse_args()
 
@@ -34,3 +33,5 @@ subprocess.call(['samtools view -@ '+ results.aligner_threads+' -bSq '+ str(resu
 subprocess.call(['bedtools genomecov -ibam '+ bam_filename +' -d > coverage.tsv'], shell=True)
 subprocess.call(['Rscript coverage.R coverage.tsv '+ results.reference_genome], shell=True)
 
+if results.delete_alignment == True:
+		subprocess.call(['rm '+ sam_filename +' '+ bam_filename], shell=True)
