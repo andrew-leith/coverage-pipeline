@@ -1,17 +1,28 @@
 ---
-title: "correlation"
+title: "Correlation"
 output: pdf_document
 ---
 
+Table 1: Kolmogorov tests comparing the distribution of coverage values among all pairs of nucleotides.  Adjusted p-values were computed using the Bonferroni adjustment.
 
 ```{r, echo = F}
 print(nucleotide.data)
 ```
 
-Density plot showing distribution:
+Table 2: Abundance of each nucleotide in the reference genome.
 
 ```{r, echo = F}
-plot(density(t.table$reads), ylim = c(0, max(all.measurements)))
+nucleotide.letters <- c("T", "C", "G", "A")
+nucleotide.prevalences <- c(length(t.table$reads) / nrow(coverage.table), length(c.table$reads) / nrow(coverage.table), length(g.table$reads) / nrow(coverage.table), length(a.table$reads) / nrow(coverage.table) )
+nucleotide.table <- data.frame(nucleotide.letters, nucleotide.prevalences)
+colnames(nucleotide.table) <- c("Nucleotide", "Proportion")
+print(nucleotide.table)
+```
+
+Figure 1: Plot showing the distribution of coverage for each nucleotide.  T is plotted in black, C in red, G in blue, and A in green.
+
+```{r, echo = F}
+plot(density(t.table$reads), ylim = c(0, max(all.measurements)), xlab = "", main = "Coverage by Nucleotide")
 lines(density(c.table$reads), col = "red")
 lines(density(g.table$reads), col = "blue")
 lines(density(a.table$reads), col = "green")
